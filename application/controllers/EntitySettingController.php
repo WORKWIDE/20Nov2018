@@ -692,8 +692,23 @@ class EntitySettingController extends MY_Controller {
         $data = array();
         $ent_id = $this->input->post('ent_id');
         if (isset($ent_id)) {
-    // Start ==========================================================================================            
-        $data['reportflag'] = $this->EntitySettingModel->getReportFieldFlagForEnity($ent_id);
+        $tabs = $this->EntitySettingModel->getTaskType($ent_id);
+            $tabDetails = array();
+            foreach ($tabs as $tab) {
+                $tabDetails[] = array(
+                    'id' => $tab['id'],
+                    'task_type' => $tab['task_type'],
+                    'task_type_description' => $tab['task_type_description'],
+                    'integrated_api' => json_decode($tab['integrated_api']),
+                    'completed_screen' => json_decode($tab['completed_screen_data']),
+                    'states_data' => json_decode($tab['states_data']),
+                );
+            }
+
+            $data['task_type_for_report_fileds'] = $tabDetails;     
+    // Start ========================================================================================== 
+            
+            $data['reportflag'] = $this->EntitySettingModel->getReportFieldFlagForEnity($ent_id);
     // End ==========================================================================================    
             $data['reportfields'] = $this->EntitySettingModel->getReportFieldForEnity($ent_id);
             $data['createfields'] = $this->EntitySettingModel->getCreateFields($ent_id);

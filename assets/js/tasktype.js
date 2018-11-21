@@ -1110,7 +1110,7 @@ function showReportFields() {
             if (res.error) {
                 showInformation('error', res.error);
             } else {
-     
+                tabs = res.task_type_for_report_fileds;                    
                 reportflag = res.reportflag;
                 reportfields = res.reportfields;
                 createfields = res.createfields;
@@ -1145,11 +1145,12 @@ function showReportFields() {
                                      
   //==============================================================================================================
                         // var ids = '';
-                        // alert(reportfields.length);
+//                         alert(reportfields.length);
+                        //for (var i = 0; i < tabs.length; i++) {
                         for (var rp = 0; rp < reportfields.length; rp++) {
                              var ids = reportfields[rp].task_type_id;
 
-                             // alert(rp+'-'+ids+','+reportfields[rp].assignmnetinfo);
+                           //alert(rp+'-'+ids+','+reportfields[rp].assignmnetinfo);
                     //============= old code issue in assetinfo ...is getting wrong status value......
                     //        $('#assignmnetinfo_' + ids).attr('checked', reportfields[j].assetinfo == 1 ? true : false);
                     //============= new code issue solve in assetinfo ...is getting wrong status value......
@@ -1964,10 +1965,11 @@ function getTabDetails() {
                 if (tabs.length > 0) {
                     var htm = '<option>Loading....</option>';
                     for (var i = 0; i < tabs.length; i++) {
+                        //alert(tabs[i].id);
                         if(reportfields!=''){
                             task_tblr_ids=res.reportfields[i].task_type_id;
                         }else{
-                            task_tblr_ids=res.reportflag[i].id;
+                            task_tblr_ids=tabs[i].id;
                         }
                         
                         cloneTask(tabs[i].id, tabs[i].task_type,task_tblr_ids);
