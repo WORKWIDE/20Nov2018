@@ -3019,9 +3019,11 @@ class Api extends REST_Controller {
             $request_headers[] = 'Content-Length: ' . strlen($params);
             $request_headers[] = 'Content-Type: multipart/x-api-remote-integration; boundary='
                     . $multipart_boundary;
+			$meatadat="testing Pending";
             $ch = curl_init($target_url);
             curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $meatadat);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $params);			
             curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
